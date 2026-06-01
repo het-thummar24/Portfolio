@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Het Thummar | AI/ML Developer & Automation Engineer</title>
+  <meta name="description" content="AI/ML Developer and Automation Engineer specializing in machine learning, deep learning, and intelligent automation systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=37" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+</head>
+<body>
+
+  <!-- scroll progress bar removed -->
+  <canvas id="neural-canvas"></canvas>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-logo">
+      <a href="#" class="logo-container">
+        <div class="logo-icon-box">
+          <span class="logo-letter">H</span>
+        </div>
+        <span class="logo-text">Het<span class="logo-highlight">Thummar</span></span>
+      </a>
+    </div>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#education" class="nav-link">Education</a></li>
+      <li><a href="#skills" class="nav-link">Skills</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#blog" class="nav-link">Blog</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+      <li class="nav-resume-mobile">
+        <button type="button" class="btn btn-outline nav-resume-mobile-btn" id="nav-resume-mobile-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume
+        </button>
+      </li>
+    </ul>
+    <button type="button" class="btn btn-outline" id="nav-resume-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Resume
+    </button>
+    <button type="button" class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Open to new opportunities
+      </div>
+      <h1 class="hero-title">
+        I Build AI Systems<br />
+        That <span class="gradient-text">Solve Real</span><br />
+        Problems
+      </h1>
+      <p class="hero-subtitle">
+        AI/ML Engineer specializing in production-ready machine learning,<br class="br-hide" />
+        large language models, and end-to-end automation at scale.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">
+          See My Projects
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost">Let's Talk</a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="section about-section">
+    <div class="container">
+      <div class="section-tag">About Me</div>
+      <div class="about-grid">
+        <div class="about-image-wrapper">
+          <div class="about-avatar">
+            <div class="avatar-ring"></div>
+            <div class="avatar-inner">
+              <img src="IMG_20260528_213652.png.jpeg" alt="Het Thummar" class="avatar-img" />
+            </div>
+
+          </div>
+          <div class="about-card-float card-float-1 glass-card">
+            <span class="float-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2a6.5 6.5 0 0 1 0 13H9"/><path d="M14.5 22a6.5 6.5 0 0 1 0-13H15"/><path d="M2 9.5a6.5 6.5 0 0 1 13 0V10"/><path d="M22 14.5a6.5 6.5 0 0 1-13 0V14"/></svg>
+            </span>
+            <span class="float-text">Machine Learning</span>
+          </div>
+          <div class="about-card-float card-float-2 glass-card">
+            <span class="float-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12h3M19 12h3M12 2v3M12 19v3"/><path d="M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+            </span>
+            <span class="float-text">Deep Learning</span>
+          </div>
+          <div class="about-card-float card-float-3 glass-card">
+            <span class="float-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v4M5.5 17.5l5-4M18.5 17.5l-5-4"/></svg>
+            </span>
+            <span class="float-text">Agentic AI</span>
+          </div>
+          <div class="about-card-float card-float-4 glass-card">
+            <span class="float-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#3776AB"><path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.912S0 5.789 0 11.969c0 6.18 3.403 5.959 3.403 5.959h2.031v-2.867s-.109-3.402 3.35-3.402h5.769s3.24.052 3.24-3.131V3.129S18.28 0 11.914 0zm-3.21 1.809a1.039 1.039 0 1 1 0 2.078 1.039 1.039 0 0 1 0-2.078zM12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.109S24 18.211 24 12.031c0-6.18-3.403-5.959-3.403-5.959h-2.031v2.867s.109 3.402-3.35 3.402H9.447s-3.24-.052-3.24 3.131v5.398S5.72 24 12.086 24zm3.21-1.809a1.039 1.039 0 1 1 0-2.078 1.039 1.039 0 0 1 0 2.078z"/></svg>
+            </span>
+            <span class="float-text">Python</span>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <h2 class="section-title">Turning data into<br /><span class="gradient-text">intelligent decisions</span></h2>
+          <p class="about-bio">
+            I am a focused Computer Engineering student and Aspiring AI/ML & Agentic AI Engineer specializing in the design, training, and orchestration of autonomous AI agents and multi-agent cognitive systems. Expert in architecting self-correcting reasoning loops (ReAct, Chain-of-Thought), function calling, dynamic tool integration, and semantic routing, I have a solid understanding of software development principles and enjoy working on solutions that create real-world impact.
+          </p>
+          <p class="about-bio">
+            Highly proficient in Python, SQL, and LangChain, I build Advanced RAG pipelines, neural classifiers, and workflow automation through specialized personal and academic projects. I specialize in deploying scalable machine learning models via PyTorch, Scikit-learn, and Hugging Face, utilizing FAISS vector stores for semantic search and MLOps databases for persistent memory. I am committed to continuous learning, rigorous model validation, and contributing effectively as a proactive team player in collaborative, high-performing squads.
+          </p>
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <div>
+                <strong>Specialization</strong>
+                <span>LLMs, MLOps, Automation</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <strong>Location</strong>
+                <span>Open to Remote &amp; Relocation</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <div class="highlight-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </div>
+              <div>
+                <strong>Focus</strong>
+                <span>Production ML Systems</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" id="hero-resume-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Resume
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION ===== -->
+  <section id="education" class="section education-section">
+    <div class="container">
+      <div class="section-tag">Education</div>
+      <svg class="section-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path class="float-path" d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+        <path class="float-path" d="M6 12v5c0 2 2.7 3 6 3s6-1 6-3v-5"/>
+      </svg>
+      <h2 class="section-title center-text">Academic <span class="gradient-text">Journey</span></h2>
+      <p class="section-sub center-text">The learning foundation behind my AI, ML, and automation work</p>
+
+      <div class="edu-timeline-container">
+        
+        <!-- Scrolling vertical timeline track and indicator dot -->
+        <div class="edu-timeline-track-wrapper">
+          <div class="edu-timeline-track-col">
+            <div class="edu-timeline-line-main"></div>
+            <div class="edu-timeline-dot-scrub"></div>
+          </div>
+        </div>
+        
+        <!-- Row 1: University -->
+        <div class="edu-row reveal">
+          <div class="edu-col edu-left">
+            <h3 class="edu-institution">LJ University</h3>
+            <span class="edu-major">Computer Engineering</span>
+          </div>
+          
+          <div class="edu-col edu-date">
+            <div class="date-stacked">
+              <span>2023 -</span>
+              <span>Present</span>
+            </div>
+          </div>
+          
+          <div class="edu-col edu-divider">
+            <div class="timeline-line"></div>
+          </div>
+          
+          <div class="edu-col edu-right">
+            <div class="edu-description" style="margin-bottom: 16px;">
+              Pursuing computer engineering with a focus on programming, software development, databases, and intelligent systems.
+            </div>
+            <div class="edu-grades-grid">
+              <span class="edu-grade-chip">Sem 1: 8.50 SPI</span>
+              <span class="edu-grade-chip">Sem 2: 7.00 SPI</span>
+              <span class="edu-grade-chip">Sem 3: 9.50 SPI</span>
+              <span class="edu-grade-chip">Sem 4: 8.88 SPI</span>
+              <span class="edu-grade-chip">Sem 5: 8.20 SPI</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Row 2: HSC -->
+        <div class="edu-row reveal">
+          <div class="edu-col edu-left">
+            <h3 class="edu-institution">Higher Secondary</h3>
+            <span class="edu-major">Percentage: 71%</span>
+          </div>
+          
+          <div class="edu-col edu-date">
+            <div class="date-stacked">
+              <span>March</span>
+              <span>2023</span>
+            </div>
+          </div>
+          
+          <div class="edu-col edu-divider">
+            <div class="timeline-line"></div>
+          </div>
+          
+          <div class="edu-col edu-right">
+            <p class="edu-description">
+              Completed higher secondary education with a strong foundation for engineering and technical studies.
+            </p>
+          </div>
+        </div>
+
+        <!-- Row 3: SSC -->
+        <div class="edu-row reveal">
+          <div class="edu-col edu-left">
+            <h3 class="edu-institution">Secondary School</h3>
+            <span class="edu-major">Percentage: 83%</span>
+          </div>
+          
+          <div class="edu-col edu-date">
+            <div class="date-stacked">
+              <span>March</span>
+              <span>2021</span>
+            </div>
+          </div>
+          
+          <div class="edu-col edu-divider">
+            <div class="timeline-line"></div>
+          </div>
+          
+          <div class="edu-col edu-right">
+            <p class="edu-description">
+              Completed secondary education with excellent academic performance.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <!-- ===== SKILLS ===== -->
+  <section id="skills" class="section skills-section">
+    <div class="container">
+      <div class="section-tag">Expertise</div>
+      <svg class="section-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path class="pulse-path" d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+        <circle cx="12" cy="12" r="4" fill="rgba(var(--accent-blue-rgb), 0.15)" stroke="var(--accent-blue)" stroke-width="2"/>
+        <circle cx="12" cy="2" r="1.5" fill="var(--accent-blue)"/>
+        <circle cx="12" cy="22" r="1.5" fill="var(--accent-blue)"/>
+        <circle cx="2" cy="12" r="1.5" fill="var(--accent-blue)"/>
+        <circle cx="22" cy="12" r="1.5" fill="var(--accent-blue)"/>
+      </svg>
+      <h2 class="section-title center-text">My <span class="gradient-text">Tech Stack</span></h2>
+      <p class="section-sub center-text">Tools and technologies I use to build intelligent systems</p>
+
+      <div class="skills-grid">
+
+        <!-- Programming Languages -->
+        <div class="skill-category glass-card">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </span>
+            <h3>Programming Languages</h3>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#3776AB"><path d="M12 2c-3.2 0-3.8 1.4-3.8 1.4V6h4.2v1H6.8C4.5 7 3 8.4 3 11.4S4.5 16 6.8 16h1.4v-2.4c0-2.2 1.5-3.4 3.8-3.4h3.8c2.1 0 3.8-1.2 3.8-3.4V3.4S18.8 2 12 2zM9.6 3.6a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6zM12 22c3.2 0 3.8-1.4 3.8-1.4V18h-4.2v-1h5.6c2.3 0 3.8-1.4 3.8-4.4S19.5 8 17.2 8h-1.4v2.4c0 2.2-1.5 3.4-3.8 3.4H8.2c-2.1 0-3.8 1.2-3.8 3.4v3.4S5.2 22 12 22zm2.4-1.6a.8.8 0 1 1 0-1.6.8.8 0 0 1 0 1.6z"/></svg>
+              Python
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#4B8BBE"><path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z"/></svg>
+              Python Libraries
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#F89820"><path d="M10 17.5c-3 0-5.5.6-5.5 1.4S7 20.5 10 20.5s5.5-.7 5.5-1.6c0-.5-.9-.9-2.2-1.1l.7-.7c2.4.4 4 1.1 4 2 0 1.6-3.6 2.9-8 2.9s-8-1.3-8-2.9c0-1.3 2.4-2.4 5.7-2.7L10 17.5zm1.4-15c2.2 2.1-4.2 3.3-.8 5.9 1.4 1.1-.4 2.1-.4 2.1s.7-1-.7-1.8C5.8 6.7 13.1 5 11.4 2.5zm3.1 3c2.4 2.4-5.1 3.8-.9 6.7 1.7 1.2-.5 2.4-.5 2.4s.8-1.1-.8-2C8 10 16.4 8.1 14.5 5.5z"/></svg>
+              Java
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#F7DF1E"><path d="M2 2h20v20H2V2zm10.5 16.2c.4.7 1 1.2 2.1 1.2 1 0 1.6-.5 1.6-1.2 0-.8-.6-1.1-1.7-1.6l-.5-.2c-1.7-.7-2.8-1.6-2.8-3.4 0-1.7 1.3-3 3.3-3 1.4 0 2.5.5 3.2 1.8l-1.8 1.1c-.4-.7-.8-1-1.4-1-.7 0-1.1.4-1.1 1 0 .7.4 1 1.5 1.4l.5.2c2 .9 3.1 1.7 3.1 3.7 0 2.1-1.6 3.2-3.8 3.2-2.1 0-3.5-1-4.2-2.3l2-1.1zM6 18.4c.4.6.8 1.1 1.6 1.1.8 0 1.3-.3 1.3-1.5v-7.8h2.3V18c0 2.4-1.4 3.5-3.5 3.5-1.9 0-3-1-3.6-2.2L6 18.4z"/></svg>
+              JavaScript
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#4479A1"><path d="M12 3c4.4 0 8 1.3 8 3v12c0 1.7-3.6 3-8 3s-8-1.3-8-3V6c0-1.7 3.6-3 8-3zm0 2C8.4 5 6 5.8 6 6s2.4 1 6 1 6-.8 6-1-2.4-1-6-1zm6 4c-1.5.7-3.7 1-6 1s-4.5-.3-6-1v3c0 .2 2.4 1 6 1s6-.8 6-1V9zm0 6c-1.5.7-3.7 1-6 1s-4.5-.3-6-1v3c0 .2 2.4 1 6 1s6-.8 6-1v-3z"/></svg>
+              SQL
+            </span>
+          </div>
+        </div>
+
+        <!-- ML / AI Frameworks -->
+        <div class="skill-category glass-card">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><path d="M8 15h.01M12 15h.01M16 15h.01"/></svg>
+            </span>
+            <h3>ML / AI Frameworks</h3>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#150458"><path d="M11.4 0H0v11.4h11.4V0zm1.2 0v11.4H24V0H12.6zM0 12.6V24h11.4V12.6H0zm12.6 0V24H24V12.6H12.6z"/></svg>
+              Pandas
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#013243"><path d="M12 1.5 2.5 7v10L12 22.5 21.5 17V7L12 1.5zm0 2.3 7.5 4.3v7.8L12 20.2l-7.5-4.3V8.1L12 3.8zm0 3.3 4.6 2.6v5.2L12 17.5l-4.6-2.6V9.7L12 7.1z"/></svg>
+              NumPy
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#F7931E"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.9 6.6-2.2 5.9c-.2.5-.6.7-1 .3l-1.8-1.4-1.1 1c-.1.1-.3.2-.5.2l.2-2.2 4.1-3.6c.2-.2 0-.3-.2-.1l-5 3.2-2.1-.7c-.5-.1-.5-.5.1-.7l8.4-3.2c.5-.2.9.1.7.7z"/></svg>
+              Scikit-learn
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#FF6F00"><path d="M12 2 4 6.6v10.8L12 22l8-4.6V6.6L12 2zm0 2.5 5.8 3.3L12 11.1 6.2 7.8 12 4.5zm-6 5.2 5 2.9v6.1l-5-2.9V9.7zm12 0v6.1l-5 2.9v-6.1l5-2.9z"/></svg>
+              TensorFlow
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#FFD21E"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-4 7.5a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm8 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-8.5 4.2c1.4 1.8 2.9 2.8 4.5 2.8s3.1-1 4.5-2.8l1.5 1.3c-1.8 2.3-3.8 3.5-6 3.5s-4.2-1.2-6-3.5l1.5-1.3z"/></svg>
+              Hugging Face
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#EE4C2C"><path d="M12 2 4.8 14.1 12 22l7.2-7.9L12 2zm0 3.6 4.5 7.6L12 15.3l-4.5-2.1L12 5.6zm0 11.2 4.5-2.1L12 19.6l-4.5-4.9 4.5 2.1z"/></svg>
+              PyTorch
+            </span>
+          </div>
+        </div>
+
+        <!-- LLMs & Generative AI -->
+        <div class="skill-category glass-card">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2a6.5 6.5 0 0 1 0 13H9"/><path d="M14.5 22a6.5 6.5 0 0 1 0-13H15"/><path d="M2 9.5a6.5 6.5 0 0 1 13 0V10"/><path d="M22 14.5a6.5 6.5 0 0 1-13 0V14"/></svg>
+            </span>
+            <h3>LLMs &amp; Generative AI</h3>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#1C3C3C"><path d="M12 2 4 6.5v9L12 20l8-4.5v-9L12 2zm0 2.4 5.8 3.3v6.6L12 17.6l-5.8-3.3V7.7L12 4.4z"/></svg>
+              LangChain
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#412991"><path d="M12 2a5.2 5.2 0 0 1 4.8 3.2 5.2 5.2 0 0 1 4 7.8 5.2 5.2 0 0 1-4.6 7.6 5.2 5.2 0 0 1-8.4 0 5.2 5.2 0 0 1-4.6-7.6 5.2 5.2 0 0 1 4-7.8A5.2 5.2 0 0 1 12 2zm0 4.2-5 2.9v5.8l5 2.9 5-2.9V9.1l-5-2.9zm0 2.2 3.1 1.8v3.6L12 15.6l-3.1-1.8v-3.6L12 8.4z"/></svg>
+              OpenAI API
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#00d4ff"><path d="M4 5h11a4 4 0 0 1 0 8H9l-3 4v-4H4V5zm12 10h4v4l-2.6-2H11a3.8 3.8 0 0 1-3.6-2.6H15a5.8 5.8 0 0 0 1-.1v.7z"/></svg>
+              RAG Systems
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#00d4ff"><path d="M4 4h16v12H7l-3 4V4zm3 4v2h10V8H7zm0 4v2h7v-2H7z"/></svg>
+              Prompt Eng.
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#7c3aed"><path d="M4 4h16v4H4V4zm0 6h10v4H4v-4zm0 6h16v4H4v-4zm12-6h4v4h-4v-4z"/></svg>
+              NLP
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#7c3aed"><path d="M12 2 2 7l10 5 10-5-10-5zm-7 9 7 3.5 7-3.5 3 1.5-10 5-10-5 3-1.5zm0 5 7 3.5 7-3.5 3 1.5-10 5-10-5 3-1.5z"/></svg>
+              Fine-tuning
+            </span>
+          </div>
+        </div>
+
+        <!-- Automation & MLOps -->
+        <div class="skill-category glass-card">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            </span>
+            <h3>Automation &amp; MLOps</h3>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#0194E2"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5zm0 2.5 6.8 3.8v7.4L12 19.5l-6.8-3.8V8.3L12 4.5z"/></svg>
+              MLflow
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#EA4B71"><path d="M6 8a3 3 0 1 1 2.8 4h6.4A3 3 0 1 1 18 16h-6.4A3 3 0 1 1 9 12H6a3 3 0 0 1 0-4zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm12 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-9 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+              n8n
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#00d4ff"><path d="M5 4h14v4H5V4zm2 6h10v4H7v-4zm-2 6h14v4H5v-4zm7-8v2m0 4v2"/></svg>
+              Vectorless RAG
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#7c3aed"><path d="M12 2a4 4 0 0 1 4 4v1h2a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3h2V6a4 4 0 0 1 4-4zm-2 5h4V6a2 2 0 1 0-4 0v1zm-2 7h2v-2H8v2zm6 0h2v-2h-2v2z"/></svg>
+              Agents &amp; Tools
+            </span>
+          </div>
+        </div>
+
+        <!-- Web Development -->
+        <div class="skill-category glass-card">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
+            </span>
+            <h3>Web Development</h3>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#092E20"><path d="M5 3h5v14c0 2.8-1.7 4-4.2 4-1.1 0-2-.2-2.8-.6v-3c.7.3 1.4.5 2.2.5 1 0 1.6-.5 1.6-1.7V7H5V3zm8 0h5v18h-5V3zm6.2 0H22v3h-2.8V3z"/></svg>
+              Django
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#E34F26"><path d="M3 2h18l-1.6 18L12 22l-7.4-2L3 2zm4 5 .2 2h9.6l-.3 3.2-4.5 1.2-4.5-1.2.2 2.2 4.3 1.1 4.3-1.1.6-7.4H7z"/></svg>
+              HTML
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#1572B6"><path d="M3 2h18l-1.6 18L12 22l-7.4-2L3 2zm4 5 .2 2h9.4l-.2 2H7.4l.2 2h8.6l-.3 2.8-3.9 1-3.9-1-.2-2H5.8l.4 3.6 5.8 1.6 5.8-1.6.8-10.4H7z"/></svg>
+              CSS
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="1.6"><ellipse cx="12" cy="12" rx="9" ry="3.5"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(120 12 12)"/><circle cx="12" cy="12" r="1.7" fill="#61DAFB" stroke="none"/></svg>
+              React.js
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#339933"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5zm-1 5h2v7c0 2-1.3 3-3.2 3-1.2 0-2.1-.4-2.8-1.2l1.3-1.5c.4.5.8.8 1.4.8.8 0 1.3-.4 1.3-1.3V7zm4.2 7.7c.7.4 1.3.6 2.1.6.7 0 1.1-.2 1.1-.7s-.4-.7-1.3-1c-1.4-.4-2.6-1-2.6-2.7 0-1.6 1.3-2.5 3-2.5 1 0 1.8.2 2.5.6l-.7 1.7c-.6-.3-1.2-.5-1.8-.5-.6 0-1 .2-1 .6 0 .5.4.6 1.4.9 1.5.5 2.5 1.1 2.5 2.7 0 1.7-1.3 2.7-3.2 2.7-1.1 0-2.2-.3-3-.8l1-1.6z"/></svg>
+              Node.js
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="#f0f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M7 8l-4 4 4 4"/><path d="M17 8l4 4-4 4"/><path d="M10 17l4-10"/></svg>
+              Express.js
+            </span>
+          </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="skill-category glass-card">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="skill-cat-header">
+            <span class="skill-cat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a7 7 0 0 0-4 12.7V19h8v-3.3A7 7 0 0 0 12 3z"/><path d="M9 22h6"/></svg>
+            </span>
+            <h3>Soft Skills</h3>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#00d4ff"><path d="M10 2h4v4h4v4h4v4h-4v4h-4v4h-4v-4H6v-4H2v-4h4V6h4V2z"/></svg>
+              Problem Solving
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#7c3aed"><path d="M12 2a7 7 0 0 0-5 11.9V17h10v-3.1A7 7 0 0 0 12 2zm-3 17h6v2H9v-2z"/></svg>
+              Critical Thinking
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#00d4ff"><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20c.5-3.5 2.2-6 5-6s4.5 2.5 5 6H3zm8 0c.4-2.6 1.6-4.7 3.5-5.6.5-.3 1-.4 1.5-.4 2.8 0 4.5 2.5 5 6H11z"/></svg>
+              Team Collaboration
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#7c3aed"><path d="M4 5h10a4 4 0 0 1 0 8H9v3l-5-5 5-5v3h5a1 1 0 1 0 0-2H4V5zm16 14H10a4 4 0 0 1 0-8h5V8l5 5-5 5v-3h-5a1 1 0 1 0 0 2h10v2z"/></svg>
+              Quick Learner
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#00d4ff"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5l4 2-1 1.7-5-3V7h2z"/></svg>
+              Time Management
+            </span>
+            <span class="skill-pill">
+              <svg class="pill-icon" viewBox="0 0 24 24" fill="#7c3aed"><path d="M4 4h16v11H7l-3 4V4zm4 4v2h8V8H8zm0 4v2h5v-2H8z"/></svg>
+              Communication
+            </span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== PROJECTS ===== -->
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects" class="section projects-section">
+    <div class="container">
+      <div class="section-tag">Work</div>
+      <svg class="section-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Bottom layer -->
+        <polygon class="layer-bottom" points="12 15.5 3 19.5 12 23.5 21 19.5" fill="currentColor" fill-opacity="0.08" />
+        <!-- Middle layer -->
+        <polygon class="layer-middle" points="12 9 3 13 12 17 21 13" fill="currentColor" fill-opacity="0.12" />
+        <!-- Top layer -->
+        <polygon class="layer-top" points="12 2.5 3 6.5 12 10.5 21 6.5" fill="currentColor" fill-opacity="0.18" />
+      </svg>
+      <h2 class="section-title center-text">Featured <span class="gradient-text">Projects</span></h2>
+      <p class="section-sub center-text">A selection of ML systems and automation pipelines I've built</p>
+
+
+
+      <div class="projects-grid">
+
+        <!-- Card 1: AI RAG Copilot -->
+        <div class="project-card" data-category="llm">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=80&fit=crop" alt="AI RAG Copilot" loading="lazy" />
+            <div class="project-img-overlay">
+              <span class="project-cat-badge">LLM / GenAI</span>
+              <a href="https://github.com/het-thummar24/AI_RAG_COPILOT" target="_blank" rel="noopener" class="proj-gh-btn" aria-label="GitHub" title="View on GitHub">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Enterprise AI RAG Copilot</h3>
+            <p class="project-desc">Production-ready AI Copilot using RAG with a local LLaMA-3 model via Ollama. Upload PDFs, DOCX, CSV - get citation-backed answers with confidence scores. Includes auth, admin dashboard, and a ChatGPT-like UI.</p>
+            <div class="project-tags">
+              <span class="tag">LangChain</span>
+              <span class="tag">FAISS</span>
+              <span class="tag">LLaMA-3</span>
+              <span class="tag">Flask</span>
+              <span class="tag">Ollama</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Fake News Detection -->
+        <div class="project-card" data-category="nlp">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&q=80&fit=crop" alt="Fake News Detection" loading="lazy" />
+            <div class="project-img-overlay">
+              <span class="project-cat-badge">NLP / Classification</span>
+              <a href="https://github.com/het-thummar24/Fake_news_Detection" target="_blank" rel="noopener" class="proj-gh-btn" aria-label="GitHub" title="View on GitHub">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">SentinelAI - Fake News Detection</h3>
+            <p class="project-desc">Flask-based fake news classifier that labels claims as REAL, FAKE, or MISLEADING using text analysis, trusted-reference similarity, image signals, and live RSS news verification with confidence scores.</p>
+            <div class="project-tags">
+              <span class="tag">PyTorch</span>
+              <span class="tag">Transformers</span>
+              <span class="tag">scikit-learn</span>
+              <span class="tag">Flask</span>
+              <span class="tag">Docker</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Hospital Management -->
+        <div class="project-card" data-category="web">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=700&q=80&fit=crop" alt="Hospital Management System" loading="lazy" />
+            <div class="project-img-overlay">
+              <span class="project-cat-badge">Web / Django</span>
+              <a href="https://github.com/het-thummar24/Hospital_Management" target="_blank" rel="noopener" class="proj-gh-btn" aria-label="GitHub" title="View on GitHub">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Hospital Management System</h3>
+            <p class="project-desc">Full-stack Django web app for managing hospital operations - patients, doctors, and admins each get role-based dashboards with appointment scheduling, approval workflows, and medical history tracking.</p>
+            <div class="project-tags">
+              <span class="tag">Django</span>
+              <span class="tag">Python</span>
+              <span class="tag">SQLite</span>
+              <span class="tag">Tailwind CSS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Weather Analysis -->
+        <div class="project-card" data-category="data">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?w=700&q=80&fit=crop" alt="Weather Analysis" loading="lazy" />
+            <div class="project-img-overlay">
+              <span class="project-cat-badge">Data Analysis</span>
+              <a href="https://github.com/het-thummar24/Weather-analysis" target="_blank" rel="noopener" class="proj-gh-btn" aria-label="GitHub" title="View on GitHub">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Weather Data Analysis &amp; Visualization</h3>
+            <p class="project-desc">Fetches live weather data via OpenWeatherMap API, stores history in MySQL, and visualizes temperature, humidity, wind speed, and pressure across cities. Includes user and admin modes.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Matplotlib</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">OpenWeatherMap</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: COVID-19 Data Analysis -->
+        <div class="project-card" data-category="data">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="project-img">
+            <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=700&q=80&fit=crop" alt="COVID-19 Data Analysis" loading="lazy" />
+            <div class="project-img-overlay">
+              <span class="project-cat-badge">Data Analysis</span>
+              <a href="https://github.com/het-thummar24/Covid19_dataAnalysis" target="_blank" rel="noopener" class="proj-gh-btn" aria-label="GitHub" title="View on GitHub">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">COVID-19 Global Data Analysis</h3>
+            <p class="project-desc">Explores and visualizes global COVID-19 data - confirmed cases, deaths, recoveries, and growth rates - using country-wise and time-series analysis with line charts, bar charts, and statistical insights.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">Matplotlib</span>
+              <span class="tag">Jupyter</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="projects-actions">
+        <button type="button" class="btn btn-outline" id="show-projects-btn" aria-expanded="false">
+          <span id="show-projects-label">Show All Projects</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- ===== BLOG ===== -->
+  <section id="blog" class="section blog-section">
+    <div class="container">
+      <div class="section-tag">Writing</div>
+      <svg class="section-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path class="book-path" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+        <path class="book-path" d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        <path class="write-path" d="M16 7h-6M14 11h-4M12 15h-2"/>
+      </svg>
+      <h2 class="section-title center-text">AI/ML &amp; Automation <span class="gradient-text">Insights</span></h2>
+      <p class="section-sub center-text">Powerful ideas on intelligent systems, MLOps, and automation for real-world impact</p>
+
+      <div class="blog-grid">
+
+        <article class="blog-card glass-card">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="blog-meta">
+            <span class="blog-date">Jun 2023</span>
+            <span class="blog-read-time">25 min read</span>
+          </div>
+          <div class="blog-tag-pill">AI Agents</div>
+          <h3 class="blog-title">LLM Powered Autonomous Agents</h3>
+          <p class="blog-excerpt">Lilian Weng's (OpenAI) definitive deep-dive into agent architectures - covering planning, memory, tool use, and the building blocks behind modern AI agent systems.</p>
+          <a href="https://lilianweng.github.io/posts/2023-06-23-agent/" target="_blank" rel="noopener" class="blog-link">
+            Read Article
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </article>
+
+        <article class="blog-card glass-card">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="blog-meta">
+            <span class="blog-date">Dec 2024</span>
+            <span class="blog-read-time">20 min read</span>
+          </div>
+          <div class="blog-tag-pill">AI Engineering</div>
+          <h3 class="blog-title">Building Effective Agents</h3>
+          <p class="blog-excerpt">Anthropic's practical engineering blueprint for building reliable AI agents - single vs multi-agent patterns, orchestration workflows, and production deployment strategies.</p>
+          <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener" class="blog-link">
+            Read Article
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </article>
+
+
+        <article class="blog-card glass-card">
+          <div class="card-stars">
+            <div class="card-stars-layer-3d layer-1-3d">
+              <div class="card-stars-layer layer-1"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-2-3d">
+              <div class="card-stars-layer layer-2"></div>
+            </div>
+            <div class="card-stars-layer-3d layer-3-3d">
+              <div class="card-stars-layer layer-3"></div>
+            </div>
+          </div>
+          <div class="blog-meta">
+            <span class="blog-date">2024</span>
+            <span class="blog-read-time">30 min read</span>
+          </div>
+          <div class="blog-tag-pill">RAG</div>
+          <h3 class="blog-title">RAG: From Basics to Advanced</h3>
+          <p class="blog-excerpt">Pinecone's comprehensive guide to Retrieval-Augmented Generation - from naive pipelines to advanced hybrid search, reranking, and agentic RAG architectures.</p>
+          <a href="https://www.pinecone.io/learn/retrieval-augmented-generation/" target="_blank" rel="noopener" class="blog-link">
+            Read Article
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="contact-wrapper glass-card">
+        <div class="card-stars">
+          <div class="card-stars-layer-3d layer-1-3d">
+            <div class="card-stars-layer layer-1"></div>
+          </div>
+          <div class="card-stars-layer-3d layer-2-3d">
+            <div class="card-stars-layer layer-2"></div>
+          </div>
+          <div class="card-stars-layer-3d layer-3-3d">
+            <div class="card-stars-layer layer-3"></div>
+          </div>
+        </div>
+        <div class="contact-left">
+          <svg class="section-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path class="plane-path" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+          </svg>
+          <div class="section-tag">Contact</div>
+          <h2 class="section-title">Let's Build<br /><span class="gradient-text">Something Great</span></h2>
+          <p class="contact-desc">
+            Looking for an AI/ML engineer who can turn complex ideas into production-ready systems? Let's talk.
+          </p>
+          <div class="contact-info-list">
+            <a href="mailto:hetthummar2474@gmail.com" class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <span>hetthummar2474@gmail.com</span>
+            </a>
+            <a href="https://www.linkedin.com/in/het-thummar-b73687381" target="_blank" rel="noopener" class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </div>
+              <span>linkedin.com/in/het-thummar</span>
+            </a>
+            <a href="https://github.com/Het-thummar24" target="_blank" rel="noopener" class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </div>
+              <span>github.com/Het-thummar24</span>
+            </a>
+          </div>
+        </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <p id="form-status" class="form-status" role="status" aria-live="polite" hidden></p>
+          <input type="checkbox" name="botcheck" id="botcheck" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="form-group">
+            <label for="name-input">Name</label>
+            <div class="tech-input-wrapper">
+              <input type="text" id="name-input" name="name" placeholder="Your name" autocomplete="name" required />
+              <span class="corner-bracket-tl"></span>
+              <span class="corner-bracket-br"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email-input">Email</label>
+            <div class="tech-input-wrapper">
+              <input type="email" id="email-input" name="email" placeholder="your@email.com" autocomplete="email" required />
+              <span class="corner-bracket-tl"></span>
+              <span class="corner-bracket-br"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subject-input">Subject</label>
+            <div class="tech-input-wrapper">
+              <input type="text" id="subject-input" name="subject" placeholder="What's this about?" />
+              <span class="corner-bracket-tl"></span>
+              <span class="corner-bracket-br"></span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message-input">Message</label>
+            <div class="tech-input-wrapper">
+              <textarea id="message-input" name="message" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
+              <span class="corner-bracket-tl"></span>
+              <span class="corner-bracket-br"></span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="submit-btn">
+            Send Message
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="nav-logo footer-logo">
+          <a href="#" class="logo-container">
+            <div class="logo-icon-box">
+              <span class="logo-letter">H</span>
+            </div>
+            <span class="logo-text">Het<span class="logo-highlight">Thummar</span></span>
+          </a>
+        </div>
+        <p class="footer-tagline">Building intelligent systems, one model at a time.</p>
+        <div class="footer-socials">
+          <a href="https://github.com/het-thummar24" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/het-thummar-b73687381" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Het Thummar. All rights reserved. &bull; Engineering Intelligent Systems</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Resume Modal -->
+  <div id="resume-modal" class="modal">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3 class="modal-title">CV_HetThummar_LJIET.pdf</h3>
+        <div class="modal-actions">
+          <a href="CV_HetThummar_LJIET.pdf?v=2" download="CV_HetThummar_LJIET.pdf" class="btn btn-primary btn-sm" id="modal-download-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+          <button class="btn-close" id="modal-close-btn" aria-label="Close Preview">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe src="CV_HetThummar_LJIET.pdf?v=2" type="application/pdf" width="100%" height="100%"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Theme Customizer -->
+  <div class="theme-customizer" id="theme-customizer">
+    <div class="customizer-panel">
+      <div class="customizer-header">Accent Color</div>
+      <div class="color-options" id="color-options">
+        <button class="color-opt active" data-theme="cyber" style="background: linear-gradient(135deg, #00d4ff, #7c3aed);" title="Cyber Cyan"></button>
+        <button class="color-opt" data-theme="emerald" style="background: linear-gradient(135deg, #10b981, #84cc16);" title="Emerald Hacker"></button>
+        <button class="color-opt" data-theme="sunset" style="background: linear-gradient(135deg, #f97316, #f43f5e);" title="Sunset Fire"></button>
+        <button class="color-opt" data-theme="rose" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);" title="Royal Rose"></button>
+        <button class="color-opt" data-theme="gold" style="background: linear-gradient(135deg, #fbbf24, #d97706);" title="Electric Gold"></button>
+      </div>
+    </div>
+    <button class="customizer-toggle" id="customizer-toggle" aria-label="Customize Theme">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        <circle cx="12" cy="12" r="4"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Custom Interactive Cursor Elements -->
+  <div class="custom-cursor-dot" id="custom-cursor-dot"></div>
+  <div class="custom-cursor-follower" id="custom-cursor-follower"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+  <script src="config.js"></script>
+  <script src="script.js?v=37"></script>
+</body>
+</html>
