@@ -67,6 +67,14 @@
   --letter-spacing-label: 0.08em;
 }
 
+:root[data-theme="monochrome"] {
+  --bg-primary:     #000000;
+  --bg-card:        rgba(10, 10, 10, 0.7);
+  --bg-card-hover:  rgba(20, 20, 20, 0.85);
+  --bg-elevated:    rgba(15, 15, 15, 0.8);
+  --gradient-surface: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
 /* ═══════════════════════════════════════════════
    RESET & BASE
 ═══════════════════════════════════════════════ */
@@ -177,47 +185,45 @@ button { border: none; background: none; font-family: inherit; }
               transform var(--transition-med),
               box-shadow var(--transition-med);
 }
-/* Spinning laser border - same technique as .btn-primary */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes cardRotate {
+  to { --border-angle: 360deg; }
+}
+
 .glass-card::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(
-    from 0deg,
-    transparent,
-    var(--accent-blue) 40%,
-    var(--accent-purple) 60%,
-    transparent 80%
-  );
-  animation: cardLaserRotate 4s linear infinite;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--border-angle, 0deg), transparent, var(--accent-blue) 40%, var(--accent-purple) 60%, transparent 80%) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: cardRotate 4s linear infinite;
   animation-play-state: paused;
-  z-index: 0;
+  z-index: 1;
   opacity: 0;
   transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-/* Dark inner fill — always present to mask conic, only border strip shows */
-.glass-card::after {
-  content: '';
-  position: absolute;
-  inset: 1.5px;
-  background: rgb(3, 3, 10);
-  border-radius: calc(var(--radius-lg) - 1.5px);
-  z-index: 1;
   pointer-events: none;
 }
 .glass-card:hover::before {
   opacity: 1;
   animation-play-state: running;
 }
-.glass-card > * {
+.glass-card > *:not(.card-stars) {
   position: relative;
   z-index: 2;
 }
 .glass-card:hover {
+  background: var(--gradient-surface), var(--bg-card-hover);
+  border-color: var(--border-accent);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-inset), var(--shadow-card), 0 0 30px rgba(var(--accent-blue-rgb), 0.2);
 }
 
@@ -358,11 +364,6 @@ button { border: none; background: none; font-family: inherit; }
 .btn-primary:active { transform: translateY(0); }
 
 @keyframes btnLaserRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes cardLaserRotate {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
@@ -556,19 +557,12 @@ button { border: none; background: none; font-family: inherit; }
 }
 
 
-#neural-canvas, #three-canvas {
+#neural-canvas {
   position: fixed;
   inset: 0;
-  pointer-events: none;
-}
-
-#neural-canvas {
   z-index: -1;
   opacity: 0.42;
-}
-
-#three-canvas {
-  z-index: -2;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -1286,48 +1280,35 @@ button { border: none; background: none; font-family: inherit; }
 .project-card:hover .project-body {
   transform: translateZ(20px);
 }
-/* Spinning laser border - same technique as .btn-primary */
 .project-card::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: conic-gradient(
-    from 0deg,
-    transparent,
-    var(--accent-blue) 40%,
-    var(--accent-purple) 60%,
-    transparent 80%
-  );
-  animation: cardLaserRotate 4s linear infinite;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--border-angle, 0deg), transparent, var(--accent-blue) 40%, var(--accent-purple) 60%, transparent 80%) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: cardRotate 4s linear infinite;
   animation-play-state: paused;
-  z-index: 0;
+  z-index: 1;
   opacity: 0;
   transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-/* Dark inner fill — always present to mask conic, only border strip shows */
-.project-card::after {
-  content: '';
-  position: absolute;
-  inset: 1.5px;
-  background: rgb(3, 3, 10);
-  border-radius: calc(var(--radius-lg) - 1.5px);
-  z-index: 1;
   pointer-events: none;
 }
 .project-card:hover::before {
   opacity: 1;
   animation-play-state: running;
 }
-.project-card > * {
+.project-card > *:not(.card-stars) {
   position: relative;
   z-index: 2;
 }
 .project-card:hover {
-  box-shadow: var(--shadow-inset), 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(var(--accent-blue-rgb), 0.2);
+  transform: translateY(-6px);
+  border-color: rgba(0, 212, 255, 0.25);
+  box-shadow: var(--shadow-inset), 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(var(--accent-blue-rgb), 0.06);
 }
 .project-card.hidden { display: none; }
 .project-card.project-collapsed { display: none; }
@@ -2072,7 +2053,7 @@ button { border: none; background: none; font-family: inherit; }
   .card-float-3 { top: 35px;   left: -15px; }
   .card-float-4 { bottom: 50px; right: -10px; }
 
-  .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .skills-grid,
   .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .blog-grid { grid-template-columns: 1fr; }
 
@@ -2096,12 +2077,6 @@ button { border: none; background: none; font-family: inherit; }
     white-space: nowrap;
     max-width: 100%;
   }
-}
-
-/* ── Phone landscape / narrow tablet ── */
-@media (max-width: 700px) {
-  .skills-grid,
-  .projects-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ── Mobile ── */
@@ -2225,41 +2200,50 @@ button { border: none; background: none; font-family: inherit; }
   }
 }
 
-/* Touch devices: disable hover effects & laser borders */
-@media (hover: none), (pointer: coarse) {
-  /* Disable card hover transforms (no mouse on touch) */
-  .glass-card:hover,
-  .project-card:hover {
-    transform: none;
-    box-shadow: var(--shadow-card);
+/* Touch devices: reduce hover motion and disable 3D bugs */
+@media (hover: none), (pointer: coarse), (max-width: 860px) {
+  /* Disable 3D perspectives on mobile containers */
+  .projects-grid, .skills-grid, .blog-grid,
+  .project-card, .skill-category, .blog-card, .contact-wrapper {
+    perspective: none !important;
+    transform-style: flat !important;
   }
-  /* Hide laser border effect on touch - no hover state */
-  .glass-card::before,
-  .glass-card::after,
+  
+  /* Reset static Z-translations that cause overlap/clipping on phones */
+  .project-card .project-img,
+  .project-card .project-body,
+  .blog-card > *:not(.card-stars),
+  .contact-wrapper > *:not(.card-stars) {
+    transform: translateZ(0) !important;
+  }
+  
+  /* Disable animated ring borders on mobile to save rendering power and prevent full-card gradients on tap */
   .project-card::before,
-  .project-card::after {
+  .glass-card::before {
     display: none !important;
   }
-  /* Re-apply background/border since pseudo-elements are removed */
-  .glass-card,
-  .project-card {
-    border: 1px solid var(--border-subtle);
+  
+  /* Disable hover pop-out effects */
+  .glass-card:hover,
+  .project-card:hover,
+  .skill-category:hover,
+  .blog-card:hover,
+  .contact-wrapper:hover {
+    transform: none !important;
+    box-shadow: var(--shadow-card);
   }
-  .project-card:hover .project-img img {
-    transform: none;
+  
+  .project-card:hover .project-img,
+  .project-card:hover .project-body,
+  .project-card:hover .project-img img,
+  .blog-card:hover > *:not(.card-stars) {
+    transform: none !important;
   }
+  
   .btn-primary:hover,
   .btn-outline:hover,
   .btn-ghost:hover {
     transform: none;
-  }
-  /* Disable heavy animations on mobile to save battery */
-  .card-stars-layer {
-    animation: none;
-  }
-  /* Paused laser animations on touch */
-  @keyframes cardLaserRotate {
-    0%, 100% { transform: none; }
   }
 }
 
