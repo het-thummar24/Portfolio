@@ -46,10 +46,11 @@ if (hamburger && navLinks) {
   });
 }
 
-// ─── NEURAL NETWORK CANVAS ───
+// ─── NEURAL NETWORK CANVAS (2D Background) ───
 (function () {
   const canvas = document.getElementById('neural-canvas');
-  const ctx    = canvas.getContext('2d');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
 
   let W, H, nodes, animId;
   let activeRgb = '0, 212, 255';
@@ -67,6 +68,19 @@ if (hamburger && navLinks) {
     cMouseX = e.clientX;
     cMouseY = e.clientY;
   });
+
+  // Touch support for mobile
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      mouseActive = true;
+      cMouseX = e.touches[0].clientX;
+      cMouseY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    mouseActive = false;
+  }, { passive: true });
 
   window.addEventListener('mouseleave', () => {
     mouseActive = false;
@@ -87,7 +101,7 @@ if (hamburger && navLinks) {
       }
     }
   }
-  window.updateCanvasColor = updateActiveColor;
+  window.update2DCanvasColor = updateActiveColor;
 
   function resize() {
     W = canvas.width  = window.innerWidth;
@@ -193,6 +207,389 @@ if (hamburger && navLinks) {
   resize();
   createNodes();
   draw();
+})();
+
+// ─── WEBGL 3D INTERACTIVE KINETIC BLOB & PLASMA MESH (Three.js) ───
+(function () {
+  const canvas = document.getElementById('three-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  const isMobile = window.innerWidth <= 860;
+
+  let renderer, scene, camera;
+  let geometry, originalPos;
+  let glassMesh, wireframeMesh, pointsMesh;
+
+  let mouse = new THREE.Vector2(-9999, -9999);
+  let mouseTarget3D = new THREE.Vector3(0, 0, 0);
+  let smoothMouse = new THREE.Vector3(0, 0, 0);
+  let mouseActive = false;
+  
+  let themeColor = new THREE.Color(0x00d4ff);
+  let scrollPercent = 0;
+
+  // Raycast mouse plane intersection tracking
+  const mousePlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+  const raycaster = new THREE.Raycaster();
+
+  let ambientLight, dirLight, pointLight1, pointLight2;
+
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  } catch (e) {
+    console.error("WebGL initialization failed, falling back gracefully", e);
+    return;
+  }
+
+  scene = new THREE.Scene();
+  
+  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.set(0, 0, 5.0);
+  camera.lookAt(0, 0, 0);
+
+  // LIGHTS - Crucial for glassmorphic specular refractions
+  ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambientLight);
+
+  dirLight = new THREE.DirectionalLight(0xffffff, 2.0);
+  dirLight.position.set(5, 5, 5);
+  scene.add(dirLight);
+
+  // Cursor tracker light (glowing cyan/active theme color)
+  pointLight1 = new THREE.PointLight(themeColor, 4.0, 12);
+  pointLight1.position.set(-2, 3, 2);
+  scene.add(pointLight1);
+
+  // Backlight helper (glowing purple by default for rich dual tones)
+  pointLight2 = new THREE.PointLight(0x7c3aed, 3.5, 12);
+  pointLight2.position.set(2, -3, 2);
+  scene.add(pointLight2);
+
+  // Soft-glowing circular particle texture for points
+  function createCircleTexture() {
+    const size = 64;
+    const ctxCanvas = document.createElement('canvas');
+    ctxCanvas.width = size;
+    ctxCanvas.height = size;
+    const ctx2d = ctxCanvas.getContext('2d');
+
+    const grad = ctx2d.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+    grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    grad.addColorStop(0.2, 'rgba(255, 255, 255, 0.8)');
+    grad.addColorStop(0.5, 'rgba(255, 255, 255, 0.15)');
+    grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+    ctx2d.fillStyle = grad;
+    ctx2d.fillRect(0, 0, size, size);
+
+    return new THREE.CanvasTexture(ctxCanvas);
+  }
+  const particleTexture = createCircleTexture();
+
+  // Create detailed Icosahedron shape (Sphere-like base)
+  const detail = isMobile ? 3 : 4;
+  geometry = new THREE.IcosahedronGeometry(1.8, detail);
+  
+  // Clone baseline position attribute
+  originalPos = geometry.attributes.position.clone();
+
+  // 1. Premium Iridescent Liquid Chrome Fluid Mesh
+  const glassMat = new THREE.MeshPhysicalMaterial({
+    color: 0x0c111e, // rich deep space chrome base
+    roughness: 0.08, // highly polished chrome
+    metalness: 0.95, // near pure metal
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.04,
+    transmission: 0.38, // semi-transmissive liquid metal to let inner core shine through
+    thickness: 1.8,
+    ior: 1.68, // higher refractive index for dramatic outlines
+    transparent: true,
+    opacity: 0.90,
+    side: THREE.DoubleSide,
+    flatShading: false
+  });
+  glassMesh = new THREE.Mesh(geometry, glassMat);
+  scene.add(glassMesh);
+
+  // 2. Glowing Outer Wireframe Exoskeleton Shell (scale 1.01)
+  const meshMat = new THREE.MeshBasicMaterial({
+    color: themeColor,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.22,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  wireframeMesh = new THREE.Mesh(geometry, meshMat);
+  wireframeMesh.scale.set(1.01, 1.01, 1.01);
+  scene.add(wireframeMesh);
+
+  // 3. Glowing Inner Plasma Points core (scale 0.98, nested inside glass)
+  const pointsMat = new THREE.PointsMaterial({
+    size: isMobile ? 0.08 : 0.06,
+    map: particleTexture,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    transparent: true,
+    color: themeColor
+  });
+  pointsMesh = new THREE.Points(geometry, pointsMat);
+  pointsMesh.scale.set(0.98, 0.98, 0.98);
+  scene.add(pointsMesh);
+
+
+
+  // Mouse move listener
+  window.addEventListener('mousemove', (e) => {
+    mouseActive = true;
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  });
+
+  window.addEventListener('mouseleave', () => {
+    mouseActive = false;
+    mouse.x = -9999;
+    mouse.y = -9999;
+  });
+
+  // Track scroll position
+  window.addEventListener('scroll', () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll > 0) {
+      scrollPercent = window.scrollY / maxScroll;
+    }
+  });
+
+  // Keep colors updated
+  function getActiveThemeColors() {
+    const style = getComputedStyle(document.documentElement);
+    const blueVal = style.getPropertyValue('--accent-blue').trim();
+    return blueVal || '#00d4ff';
+  }
+
+  function updateActiveColors() {
+    const colors = getActiveThemeColors();
+    const targetColor = new THREE.Color(colors);
+
+    // Complementary secondary color (rotate hue for dual spotlight contrasts)
+    const secondaryColor = targetColor.clone().offsetHSL(0.28, 0, 0);
+
+    // Transition material colors and point light 1 color smoothly using GSAP tweens
+    gsap.to(themeColor, {
+      r: targetColor.r,
+      g: targetColor.g,
+      b: targetColor.b,
+      duration: 0.8,
+      ease: 'power2.out',
+      onUpdate: () => {
+        meshMat.color.copy(themeColor);
+        pointsMat.color.copy(themeColor);
+        pointLight1.color.copy(themeColor);
+      }
+    });
+
+    // Smoothly transition secondary light color
+    gsap.to(pointLight2.color, {
+      r: secondaryColor.r,
+      g: secondaryColor.g,
+      b: secondaryColor.b,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+  }
+  window.updateThreeCanvasColor = updateActiveColors;
+
+  // Aspect ratio resize handler
+  function resize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+  window.addEventListener('resize', resize);
+
+  // Performance Observer
+  let isInView = true;
+  const canvasObserver = new IntersectionObserver((entries) => {
+    isInView = entries[0].isIntersecting;
+  }, { threshold: 0.01 });
+  canvasObserver.observe(canvas);
+
+  // 3D Render Loop
+  let time = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!isInView) return;
+
+    time += 0.007;
+
+    // Project mouse cursor to 3D space
+    if (mouseActive) {
+      raycaster.setFromCamera(mouse, camera);
+      raycaster.ray.intersectPlane(mousePlane, mouseTarget3D);
+      smoothMouse.lerp(mouseTarget3D, 0.08); // smooth damping
+      
+      // Update point light 1 position to follow cursor closely for interactive glass highlights
+      pointLight1.position.copy(smoothMouse);
+      pointLight1.position.z = 1.8; // hover slightly above the mesh plane
+    } else {
+      // Float target tracker light slowly when mouse is inactive
+      pointLight1.position.x = Math.sin(time) * 1.5;
+      pointLight1.position.y = Math.cos(time * 0.8) * 1.5;
+      pointLight1.position.z = 2.0;
+    }
+
+    // Oscillate light colors around the active theme color HSL base for iridescent reflections
+    const activeHSL = {};
+    themeColor.getHSL(activeHSL);
+    const dynamicHue1 = (activeHSL.h + Math.sin(time * 0.35) * 0.12 + 1.0) % 1.0;
+    const dynamicHue2 = (activeHSL.h + 0.28 + Math.cos(time * 0.25) * 0.10 + 1.0) % 1.0;
+    pointLight1.color.setHSL(dynamicHue1, 0.95, activeHSL.l);
+    pointLight2.color.setHSL(dynamicHue2, 0.95, 0.5);
+
+    // Float spotlight 2 slowly around the back side for shifting kinetic reflections
+    pointLight2.position.x = Math.cos(time * 0.6) * 3.5;
+    pointLight2.position.y = Math.sin(time * 0.4) * 2.0;
+    pointLight2.position.z = Math.sin(time * 0.6) * 3.5;
+
+    // Scroll morph weights
+    let t1 = 0, t2 = 0, t3 = 0;
+    if (scrollPercent < 0.45) {
+      const t = scrollPercent / 0.45;
+      t1 = 1.0 - t;
+      t2 = t;
+    } else if (scrollPercent < 0.85) {
+      const t = (scrollPercent - 0.45) / 0.40;
+      t2 = 1.0 - t;
+      t3 = t;
+    } else {
+      t3 = 1.0;
+    }
+
+    // Update organic geometry morphing
+    const posAttr = geometry.attributes.position;
+    const activePositions = posAttr.array;
+    const origPositions = originalPos.array;
+    const vertexCount = posAttr.count;
+
+    for (let i = 0; i < vertexCount; i++) {
+      const i3 = i * 3;
+      const ox = origPositions[i3];
+      const oy = origPositions[i3 + 1];
+      const oz = origPositions[i3 + 2];
+
+      const vDir = new THREE.Vector3(ox, oy, oz).normalize();
+
+      // State 0: Kinetic Jelly Blob (3D Wave interference)
+      const wave1 = Math.sin(vDir.x * 2.5 + time * 1.6) * Math.cos(vDir.y * 2.5 - time * 1.3) * Math.sin(vDir.z * 2.5 + time * 1.9);
+      const wave2 = Math.sin(vDir.x * 6.0 - time * 2.2) * Math.cos(vDir.z * 6.0 + time * 1.7) * 0.18;
+      const radius = 1.7 + wave1 * 0.52 + wave2 * 0.15;
+      
+      const s0_X = vDir.x * radius;
+      const s0_Y = vDir.y * radius;
+      const s0_Z = vDir.z * radius;
+
+      // State 1: Twist DNA Helix (Stretched spiral helix along height)
+      const spiralAngle = (oy + 3.0) * 1.4 + time * 1.5;
+      const spiralRad = 0.95 + Math.sin(time + oy * 2.2) * 0.22;
+      
+      const s1_X = spiralRad * Math.cos(spiralAngle);
+      const s1_Y = oy * 1.15;
+      const s1_Z = spiralRad * Math.sin(spiralAngle);
+
+      // State 2: Waving Landscape Terrain (Flat wave grid)
+      const gridX = (ox / 1.8) * 4.6;
+      const gridZ = (oz / 1.8) * 4.6;
+      const gridY = -1.3 + Math.sin(gridX * 1.4 + time * 1.8) * Math.cos(gridZ * 1.4 + time * 1.4) * 0.42;
+      
+      const s2_X = gridX;
+      const s2_Y = gridY;
+      const s2_Z = gridZ;
+
+      // Interpolate coordinates across States
+      let tx = s0_X * t1 + s1_X * t2 + s2_X * t3;
+      let ty = s0_Y * t1 + s1_Y * t2 + s2_Y * t3;
+      let tz = s0_Z * t1 + s1_Z * t2 + s2_Z * t3;
+
+      // Cursor tactile warp deflection ("Poke" indentation)
+      if (mouseActive) {
+        const dx = tx - smoothMouse.x;
+        const dy = ty - smoothMouse.y;
+        const dz = tz - smoothMouse.z; // FIXED BUG: changed pz to tz
+        const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+        const touchRadius = isMobile ? 1.0 : 2.0;
+
+        if (dist < touchRadius) {
+          const force = (1.0 - dist / touchRadius) * 0.45;
+          // Displace vertex inward towards the core center, creating a tactile poke dent
+          tx -= vDir.x * force * 0.8;
+          ty -= vDir.y * force * 0.8;
+          tz -= vDir.z * force * 0.8;
+        }
+      }
+
+      // Write values back
+      activePositions[i3]     = tx;
+      activePositions[i3 + 1] = ty;
+      activePositions[i3 + 2] = tz;
+    }
+    posAttr.needsUpdate = true;
+    geometry.computeVertexNormals(); // Crucial for real-time glass physical lighting refractions!
+
+    // Slow, organic baseline rotation
+    glassMesh.rotation.y += 0.0018;
+    glassMesh.rotation.x = Math.sin(time * 0.12) * 0.08;
+    wireframeMesh.rotation.copy(glassMesh.rotation);
+    pointsMesh.rotation.copy(glassMesh.rotation);
+
+    // Scroll-linked camera translation target
+    let targetCamX = 0;
+    let targetCamY = 0;
+    let targetCamZ = 5.0;
+    let targetLookY = 0;
+
+    if (scrollPercent < 0.45) {
+      // Hero (Centered close-up) down to About (Stretched helix view)
+      const t = scrollPercent / 0.45;
+      targetCamY = t * 0.4;
+      targetCamZ = 5.0 + t * 1.3;
+      targetLookY = -t * 0.1;
+    } else if (scrollPercent < 0.85) {
+      // Skills/Projects (Perspective angle looking down at grid landscape)
+      const t = (scrollPercent - 0.45) / 0.40;
+      targetCamY = 0.4 + t * 2.1;
+      targetCamZ = 6.3 - t * 0.5;
+      targetLookY = -0.1 - t * 0.8;
+    } else {
+      // Contact
+      const t = (scrollPercent - 0.85) / 0.15;
+      targetCamY = 2.5 + t * 0.5;
+      targetCamZ = 5.8 + t * 0.4;
+      targetLookY = -0.9 + t * 0.2;
+    }
+
+    // Camera coordinate smoothing
+    camera.position.x += (targetCamX - camera.position.x) * 0.06;
+    camera.position.y += (targetCamY - camera.position.y) * 0.06;
+    camera.position.z += (targetCamZ - camera.position.z) * 0.06;
+
+    const lookTarget = new THREE.Vector3(0, targetLookY, 0);
+    camera.lookAt(lookTarget);
+
+    // Camera mouse drift parallax (Desktop only)
+    if (mouseActive && !isMobile) {
+      camera.position.x += mouse.x * 0.18;
+      camera.position.y += mouse.y * 0.15;
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  // Initialize
+  updateActiveColors();
+  resize();
+  animate();
 })();
 
 // ─── COUNTER ANIMATION ───
@@ -536,7 +933,8 @@ colorOpts.forEach(opt => {
       emerald: { blue: '#10b981', blueRgb: '16, 185, 129', purple: '#84cc16' },
       sunset: { blue: '#f97316', blueRgb: '249, 115, 22', purple: '#f43f5e' },
       rose: { blue: '#ec4899', blueRgb: '236, 72, 153', purple: '#8b5cf6' },
-      gold: { blue: '#fbbf24', blueRgb: '251, 191, 36', purple: '#d97706' }
+      gold: { blue: '#fbbf24', blueRgb: '251, 191, 36', purple: '#d97706' },
+      quantum: { blue: '#00f5ff', blueRgb: '0, 245, 255', purple: '#00ff88' }
     };
     
     if (themes[theme]) {
@@ -544,7 +942,9 @@ colorOpts.forEach(opt => {
       document.documentElement.style.setProperty('--accent-blue-rgb', themes[theme].blueRgb);
       document.documentElement.style.setProperty('--accent-purple', themes[theme].purple);
       localStorage.setItem('portfolio-theme', theme);
-      updateCanvasColor();
+      
+      if (typeof window.update2DCanvasColor === 'function') window.update2DCanvasColor();
+      if (typeof window.updateThreeCanvasColor === 'function') window.updateThreeCanvasColor();
       
       // Close panel after selection
       customizerToggle.classList.remove('active');
@@ -556,7 +956,15 @@ colorOpts.forEach(opt => {
 const savedTheme = localStorage.getItem('portfolio-theme');
 if (savedTheme) {
   const savedOpt = document.querySelector(`[data-theme="${savedTheme}"]`);
-  if (savedOpt) savedOpt.click();
+  if (savedOpt) {
+    savedOpt.click();
+  } else {
+    if (typeof window.update2DCanvasColor === 'function') window.update2DCanvasColor();
+    if (typeof window.updateThreeCanvasColor === 'function') window.updateThreeCanvasColor();
+  }
+} else {
+  if (typeof window.update2DCanvasColor === 'function') window.update2DCanvasColor();
+  if (typeof window.updateThreeCanvasColor === 'function') window.updateThreeCanvasColor();
 }
 
 // ─── PREMIUM FACELIFT INTERACTIONS ───
@@ -727,8 +1135,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 
 // ─── GSAP ANIMATIONS ───
-// Disable heavy animations on mobile for better performance
-const isMobile = false; // Enabled premium desktop animations globally on mobile
+// Proper mobile detection - check both screen size AND touch capability
+const isMobile = window.innerWidth <= 860 || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
 // Set initial states for animated elements
 gsap.set('.hero-title, .hero-subtitle, .hero-cta .btn', { opacity: 1, y: 0, x: 0 });
@@ -1072,86 +1481,87 @@ if (!isMobile) {
   });
 
   // ══════════════════════════════════════
-  // HOVER ANIMATIONS (preserved)
+  // HOVER ANIMATIONS (desktop only — touch has no hover)
   // ══════════════════════════════════════
+  if (!isTouch) {
+    // Smooth hover for buttons
+    gsap.utils.toArray('.btn').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        gsap.to(btn, { duration: 0.35, y: -4, ease: 'power2.out' });
+      });
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, { duration: 0.35, y: 0, ease: 'power2.out' });
+      });
+    });
 
-  // Smooth hover for buttons
-  gsap.utils.toArray('.btn').forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-      gsap.to(btn, { duration: 0.35, y: -4, ease: 'power2.out' });
+    // Smooth hover for glass cards
+    gsap.utils.toArray('.glass-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, { duration: 0.35, y: -6, ease: 'power2.out' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { duration: 0.35, y: 0, ease: 'power2.out' });
+      });
     });
-    btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, { duration: 0.35, y: 0, ease: 'power2.out' });
-    });
-  });
 
-  // Smooth hover for glass cards
-  gsap.utils.toArray('.glass-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      gsap.to(card, { duration: 0.35, y: -6, ease: 'power2.out' });
+    // Smooth hover for project cards
+    gsap.utils.toArray('.project-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, { duration: 0.35, y: -8, ease: 'power2.out' });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, { duration: 0.35, y: 0, ease: 'power2.out' });
+      });
     });
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, { duration: 0.35, y: 0, ease: 'power2.out' });
-    });
-  });
 
-  // Smooth hover for project cards
-  gsap.utils.toArray('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      gsap.to(card, { duration: 0.35, y: -8, ease: 'power2.out' });
+    // Smooth hover for skill pills
+    gsap.utils.toArray('.skill-pill').forEach(pill => {
+      pill.addEventListener('mouseenter', () => {
+        gsap.to(pill, { duration: 0.3, y: -3, ease: 'power2.out' });
+      });
+      pill.addEventListener('mouseleave', () => {
+        gsap.to(pill, { duration: 0.3, y: 0, ease: 'power2.out' });
+      });
     });
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, { duration: 0.35, y: 0, ease: 'power2.out' });
-    });
-  });
 
-  // Smooth hover for skill pills
-  gsap.utils.toArray('.skill-pill').forEach(pill => {
-    pill.addEventListener('mouseenter', () => {
-      gsap.to(pill, { duration: 0.3, y: -3, ease: 'power2.out' });
+    // Smooth hover for color options
+    gsap.utils.toArray('.color-opt').forEach(opt => {
+      opt.addEventListener('mouseenter', () => {
+        gsap.to(opt, { duration: 0.3, scale: 1.15, ease: 'back.out(1.5)' });
+      });
+      opt.addEventListener('mouseleave', () => {
+        gsap.to(opt, { duration: 0.3, scale: 1, ease: 'back.out(1.5)' });
+      });
     });
-    pill.addEventListener('mouseleave', () => {
-      gsap.to(pill, { duration: 0.3, y: 0, ease: 'power2.out' });
-    });
-  });
+  } // end !isTouch
 
-  // Smooth hover for color options
-  gsap.utils.toArray('.color-opt').forEach(opt => {
-    opt.addEventListener('mouseenter', () => {
-      gsap.to(opt, { duration: 0.3, scale: 1.15, ease: 'back.out(1.5)' });
-    });
-    opt.addEventListener('mouseleave', () => {
-      gsap.to(opt, { duration: 0.3, scale: 1, ease: 'back.out(1.5)' });
-    });
-  });
-
-  // 3D Tilt for cards - upgraded to dramatic pop-out effects
-  if (typeof VanillaTilt !== 'undefined' && !isMobile) {
+  // 3D Tilt for cards - only on desktop (non-touch devices)
+  if (typeof VanillaTilt !== 'undefined' && !isTouch) {
     VanillaTilt.init(document.querySelectorAll(".project-card, .blog-card, .skill-category"), {
-      max: 12, // More dramatic tilt range for smaller cards
-      speed: 600, // Faster tilt response
+      max: 12,
+      speed: 600,
       perspective: 1000,
-      scale: 1.025, // Slight popout scale
+      scale: 1.025,
       glare: true,
-      "max-glare": 0.15, // Sleek premium lighting reflections
+      "max-glare": 0.15,
     });
 
     VanillaTilt.init(document.querySelectorAll(".contact-wrapper"), {
-      max: 4, // Gentle, premium tilt for the wide contact card
+      max: 4,
       speed: 600,
       perspective: 1200,
-      scale: 1.01, // Subtle, pleasant scale
+      scale: 1.01,
       glare: true,
-      "max-glare": 0.1, // Soft premium lighting reflection
+      "max-glare": 0.1,
     });
 
     VanillaTilt.init(document.querySelectorAll(".edu-row"), {
-      max: 6, // Gentler tilt for wide rows
+      max: 6,
       speed: 500,
       perspective: 1200,
       scale: 1.01,
       glare: true,
-      "max-glare": 0.08, // Subtle premium refraction gloss
+      "max-glare": 0.08,
     });
   }
 }
